@@ -2,6 +2,9 @@ package org.example.mylotty.infrastructure.po;
 
 import java.util.Date;
 
+/**
+ * 活动基础信息表
+ */
 public class Activity {
 
     // 自增ID
@@ -135,5 +138,6 @@ public class Activity {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
 }
 
