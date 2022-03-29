@@ -31,3 +31,4 @@ hs_err_pid*
 /lottery-interfaces/lottery-interfaces.iml
 /lottery-rpc/lottery-rpc.iml
 /lottery-application/target/
+/lottery-test/lottery-test.iml

@@ -1,25 +1,38 @@
 package org.example.lotty.domain.strategy.service.draw;
 
+
+import org.example.lotty.domain.strategy.annotation.Strategy;
 import org.example.lotty.domain.strategy.service.algorithm.IDrawAlgorithm;
-import org.example.mylotty.common.Constants;
+import org.springframework.core.annotation.AnnotationUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @description: 抽奖统一配置信息类
+ */
 public class DrawConfig {
-    @Resource
-    private IDrawAlgorithm defaultRateRandomDrawAlgorithm;
 
     @Resource
-    private IDrawAlgorithm singleRateRandomDrawAlgorithm;
+    private List<IDrawAlgorithm> algorithmList;
 
+    /**
+     * 抽奖策略组
+     */
     protected static Map<Integer, IDrawAlgorithm> drawAlgorithmGroup = new ConcurrentHashMap<>();
 
     @PostConstruct
     public void init() {
-        drawAlgorithmGroup.put(Constants.StrategyMode.ENTIRETY.getCode(), defaultRateRandomDrawAlgorithm);
-        drawAlgorithmGroup.put(Constants.StrategyMode.SINGLE.getCode(), singleRateRandomDrawAlgorithm);
+        algorithmList.forEach(algorithm -> {
+            Strategy strategy = AnnotationUtils.findAnnotation(algorithm.getClass(), Strategy.class);
+            if (null != strategy) {
+                drawAlgorithmGroup.put(strategy.strategyMode().getCode(), algorithm);
+            }
+        });
     }
+
 }

@@ -1,24 +1,32 @@
 package org.example.lotty.domain.strategy.model.res;
 
-import org.example.lotty.domain.strategy.model.vo.DrawAwardInfo;
-import org.example.mylotty.common.Constants;
+import org.example.lotty.domain.strategy.model.vo.DrawAwardVO;
+import org.example.lotty.common.Constants;
 
 /**
  * 抽奖结果
  */
 public class DrawResult {
-    // 用户Id
+
+    /**
+     * 用户ID
+     */
     private String uId;
-    // 策略Id
+
+    /**
+     * 策略ID
+     */
     private Long strategyId;
+
     /**
      * 中奖状态：0未中奖、1已中奖、2兜底奖 Constants.DrawState
      */
     private Integer drawState = Constants.DrawState.FAIL.getCode();
+
     /**
      * 中奖奖品信息
      */
-    private DrawAwardInfo drawAwardInfo;
+    private DrawAwardVO drawAwardInfo;
 
     public DrawResult() {
     }
@@ -29,7 +37,7 @@ public class DrawResult {
         this.drawState = drawState;
     }
 
-    public DrawResult(String uId, Long strategyId, Integer drawState, DrawAwardInfo drawAwardInfo) {
+    public DrawResult(String uId, Long strategyId, Integer drawState, DrawAwardVO drawAwardInfo) {
         this.uId = uId;
         this.strategyId = strategyId;
         this.drawState = drawState;
@@ -60,11 +68,12 @@ public class DrawResult {
         this.drawState = drawState;
     }
 
-    public DrawAwardInfo getDrawAwardInfo() {
+    public DrawAwardVO getDrawAwardInfo() {
         return drawAwardInfo;
     }
 
-    public void setDrawAwardInfo(DrawAwardInfo drawAwardInfo) {
+    public void setDrawAwardInfo(DrawAwardVO drawAwardInfo) {
         this.drawAwardInfo = drawAwardInfo;
     }
+
 }
